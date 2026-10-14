@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080d18" />
+  <title>CyberShield AI — Security Console</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="CyberShield AI home">
+        <span class="brand-mark">✦</span><span>CyberShield <b>AI</b><small>SECURITY CONSOLE</small></span>
+      </a>
+      <div class="nav-label">WORKSPACE</div>
+      <a class="nav-item active" href="#overview"><span>◫</span> Overview</a>
+      <a class="nav-item" href="#new-scan"><span>⌁</span> New scan</a>
+      <a class="nav-item" href="#history"><span>◷</span> Scan history</a>
+      <div class="sidebar-bottom"><span class="status-dot"></span><div><b>Scanner online</b><small>Passive checks only</small></div></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><div class="eyebrow">SECURITY OPERATIONS / OVERVIEW</div><h1>Security dashboard</h1></div>
+        <div class="topbar-right"><span class="system-status"><span class="status-dot"></span> API connected</span><a class="docs-link" href="/docs" target="_blank" rel="noreferrer">API docs ↗</a></div>
+      </header>
+
+      <section class="welcome-row" id="overview">
+        <div><div class="eyebrow cyan">PASSIVE WEBSITE ASSESSMENT</div><h2>See your security posture <span>clearly.</span></h2><p>Run authorized, non-invasive checks and review practical hardening recommendations.</p></div>
+        <div class="shield-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="shield">⬡<span>✓</span></div></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Scan summary">
+        <article class="stat-card"><div class="stat-top"><span>Total scans</span><span class="stat-icon">⌁</span></div><strong id="stat-total">—</strong><small>Saved scan records</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Critical</span><span class="severity-dot critical"></span></div><strong id="stat-critical">—</strong><small>Immediate attention</small></article>
+        <article class="stat-card"><div class="stat-top"><span>High</span><span class="severity-dot high"></span></div><strong id="stat-high">—</strong><small>High-priority findings</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Medium</span><span class="severity-dot medium"></span></div><strong id="stat-medium">—</strong><small>Review recommended</small></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel scan-panel" id="new-scan">
+          <div class="panel-heading"><div><div class="eyebrow">START ASSESSMENT</div><h3>New passive scan</h3></div><span class="pill"><span class="status-dot"></span> Non-invasive</span></div>
+          <p class="panel-copy">Enter a website you own or are explicitly authorized to assess. This MVP checks the landing response and standard security.txt location only.</p>
+          <form id="scan-form">
+            <label for="target">Target URL</label>
+            <div class="input-wrap"><span>↗</span><input id="target" name="target" type="url" placeholder="https://your-domain.com" required autocomplete="url" /></div>
+            <label class="check-row"><input id="authorized" name="authorized" type="checkbox" required /><span>I have permission to assess this website.</span></label>
+            <button id="scan-button" class="primary-button" type="submit"><span>⌁</span> Run passive scan <span class="button-arrow">→</span></button>
+            <div id="scan-message" class="message" role="status" aria-live="polite"></div>
+          </form>
+          <div class="scan-note"><span>ⓘ</span><span>No exploit payloads, login attempts, data extraction, or destructive tests are performed.</span></div>
+        </article>
+
+        <article class="panel latest-panel">
+          <div class="panel-heading"><div><div class="eyebrow">LATEST RESULT</div><h3>Most recent scan</h3></div><span class="live-label">● LIVE DATA</span></div>
+          <div id="latest-result" class="latest-empty"><div class="empty-icon">⌁</div><b>No scan loaded yet</b><span>Run a scan or select a record from history.</span></div>
+          <div id="latest-details" class="latest-details hidden"></div>
+        </article>
+      </section>
+
+      <section class="panel history-panel" id="history">
+        <div class="panel-heading history-heading"><div><div class="eyebrow">YOUR ASSESSMENTS</div><h3>Scan history</h3></div><button id="refresh-button" class="secondary-button" type="button">↻ Refresh</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Target</th><th>Scan date</th><th>HTTP</th><th>Findings</th><th>Mode</th><th></th></tr></thead><tbody id="history-body"><tr><td colspan="6" class="table-empty">Loading scan history…</td></tr></tbody></table></div>
+        <div class="table-foot"><span id="history-count">Loading records</span><span>Stored in your local app database</span></div>
+      </section>
+      <footer><span>CyberShield AI <b>v0.1.0</b></span><span>Defensive tooling · Passive checks only</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card"><div class="modal-head"><div><div class="eyebrow">ASSESSMENT DETAILS</div><h3 id="modal-title">Scan report</h3></div><button id="modal-close" class="icon-button" type="button" aria-label="Close report">✕</button></div><div id="modal-content"></div></div>
+  </div>
+</body>
+</html>
